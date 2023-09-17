@@ -1,0 +1,9 @@
+<div class="card h-100">
+  <img class="card-img-top" src="{{gameData.thumbnail}}" />
+  <div class="card-body">
+    <h5 class="card-title">{{gameData.title}}</h5>
+    <p class="card-text">{{gameData.short_description}}
+    </p>
+    <a class="btn btn-secondary" (click)="loadOnNewPage(gameData.id)">More detail</a>
+  </div>
+</div>

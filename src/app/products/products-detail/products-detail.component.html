@@ -1,0 +1,38 @@
+<div class="container">
+  <h1 class="h1">{{data.title}}</h1>
+  <!-- images -->
+  <h2>Screenshots</h2>
+  <div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      <ng-container *ngFor="let img of data.screenshots;let i=index">
+        <div class="carousel-item" [ngClass]="i==0? 'active':null">
+          <img src="{{img.image}}" class="d-block w-100">
+        </div>
+      </ng-container>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="container">
+    <h3 class="h3">Genre: {{data.genre}}</h3>
+    <p>{{data.description}}</p>
+    <!-- requirements -->
+    <ng-container *ngIf="minReqKeys">
+      <h4>Requirements</h4>
+      <ul>
+        <li *ngFor="let i of minReqKeys">{{i}}:{{data.minimum_system_requirements[i]}}</li>
+      </ul>
+    </ng-container>
+
+    <h6 class="h6">Publisher : {{data.publisher}}</h6>
+  </div>
+
+
+  <!-- Staus is used to check the color of border -->
+</div>

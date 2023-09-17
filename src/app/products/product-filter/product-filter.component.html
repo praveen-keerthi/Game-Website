@@ -1,0 +1,35 @@
+<div class="filter-bar d-flex align-items-center">
+  <div class="filter-bar-tile">
+    <label for="duration">Filters:</label>
+  </div>
+  <!-- Duration filter (select one) -->
+  <div class="filter-bar-tile d-flex align-items-center">
+    <select class="form-control" name="platform" id="plaform-select" (change)="selectPlatform()" #platform>
+      <option disabled selected value="">
+        Platform
+      </option>
+      <option value="pc">PC (Windows)</option>
+      <option value="browser">Web Browser</option>
+    </select>
+    <div class="ms-3" style="color: #0645ad; cursor: pointer" (click)="clearPlatform()" #platform>
+      Clear
+    </div>
+  </div>
+  <!-- Category filter (select one or many) -->
+  <div class="filter-bar-tile d-flex align-items-center">
+    <select class="form-control" id="category-select" (change)="selectGenre()" #genre>
+      <option disabled selected value="">Genre</option>
+      <option value="shooter">Shooter</option>
+      <option value="mmorpg">MMOARPG</option>
+      <option value="fighting">Fighting</option>
+      <option value="sports">Sports</option>
+      <option value="racing">Racing</option>
+      <option value="card">Card Games</option>
+      <option value="fantasy">Fantasy</option>
+      <option value="social">Social</option>
+    </select>
+    <div class="ms-3" style="color: #0645ad; cursor: pointer" (click)="clearGenre()">
+      Clear
+    </div>
+  </div>
+</div>

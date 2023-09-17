@@ -1,0 +1,14 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:var(--dark-primary);
+    &-logo{
+
+        &__img{
+            width: 96px;
+            height: 48px;    
+        }
+        
+    }
+}

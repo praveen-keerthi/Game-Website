@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Colors
+
+:root {
+    --dark-primary: #27374D;
+    --grey-primary: #526D82;
+    --grey-secondary: #9DB2BF;
+    --light-primary: #DDE6ED;
+    --light-secondary: #fff;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    color: var(--light-primary);
+}
+
+// body {
+//     background-color: var(--light-primary);
+// }
+
+// Mixins
+
+@mixin rounded-border {
+    border: 0.5px solid var(--light-primary);
+    border-radius: 50px
+}

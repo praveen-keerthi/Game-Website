@@ -1,0 +1,10 @@
+.filter-bar {
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+  padding: 20px 0px;
+
+  &-tile {
+    border-right: 1px solid #999;
+    padding: 0px 20px;
+  }
+}
