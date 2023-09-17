@@ -13,16 +13,11 @@ export class ProductFilterComponent implements OnInit {
   @ViewChild('platform')
   platform!: ElementRef;
 
-  @Output() gameByTag: EventEmitter<any> = new EventEmitter<any>();
-
   seletedTag: { 'genre': string, 'platform': string } = { 'genre': '', 'platform': '' }
 
   constructor(private apiService: apiCallService) { }
 
   ngOnInit(): void {
-    this.apiService.gameByTag$.subscribe(data => {
-      this.gameByTag.emit(data);
-    })
   }
 
   selectGenre() {

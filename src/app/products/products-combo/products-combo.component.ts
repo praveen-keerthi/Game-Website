@@ -8,7 +8,6 @@ import { apiCallService } from 'src/app/api.service';
 })
 export class ProductsComboComponent implements OnInit {
 
-  // @Output() detailedGameData: EventEmitter<any> = new EventEmitter<any>();
 
   public data?: any;
 
@@ -19,8 +18,11 @@ export class ProductsComboComponent implements OnInit {
   ngOnInit() {
     this.apiService.data$.subscribe(data => {
       this.data = data.slice(0, 12);
-    }
-    );
+    });
+
+    this.apiService.gameByTag$.subscribe(data => {
+      this.data = data;
+    })
   }
 
   changeDataFromFilter(dataFromFilter: any) {

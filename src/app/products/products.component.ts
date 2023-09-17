@@ -7,5 +7,4 @@ import { apiCallService } from '../api.service';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent {
-  // dataOfAGame: any;
 }

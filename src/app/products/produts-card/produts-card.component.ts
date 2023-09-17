@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { apiCallService } from 'src/app/api.service';
 
@@ -9,14 +9,10 @@ import { apiCallService } from 'src/app/api.service';
 })
 export class ProdutsCardComponent {
   @Input() gameData?: any;
-  // @Output() detailedGameData = new EventEmitter<any>();
-
-
-
-  constructor(private apiSerivce: apiCallService, private router: Router) { }
+  constructor(private apiService: apiCallService, private router: Router) { }
 
   loadOnNewPage(id: string) {
-    this.apiSerivce.aGameData(id);
+    this.apiService.aGameData(id);
     this.router.navigate(['/detail']);
 
   }

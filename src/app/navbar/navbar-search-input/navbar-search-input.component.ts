@@ -11,7 +11,7 @@ export class NavbarSearchInputComponent {
 
   @ViewChild('form')
   public searchVal!: NgForm;
-  @Output() public aGameEmitter = new EventEmitter();
+  // @Output() public aGameEmitter = new EventEmitter();
 
   public searchRecommondation: any = { 'platform': '', 'genre': [] };
   public debounceTimer: any = 0;
@@ -31,7 +31,7 @@ export class NavbarSearchInputComponent {
 
   returngame() {
     this.apiService.aGame$.subscribe(data => {
-      this.aGameEmitter.emit(data);
+      // this.aGameEmitter.emit(data);
     })
   }
 
