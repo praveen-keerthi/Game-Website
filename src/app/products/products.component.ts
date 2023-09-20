@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { apiCallService } from '../api.service';
+import { apiCallService } from '../service/api.service';
 
 @Component({
   selector: 'app-products',
@@ -7,4 +7,5 @@ import { apiCallService } from '../api.service';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent {
+
 }

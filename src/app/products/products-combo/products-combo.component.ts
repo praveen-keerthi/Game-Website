@@ -1,5 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { apiCallService } from 'src/app/api.service';
+import { Store, select } from '@ngrx/store';
+import { noop, tap } from 'rxjs';
+import { apiCallService } from 'src/app/service/api.service';
+import { ProductAction } from 'src/app/store/actions/products.action';
+import { ProductState } from 'src/app/store/reducers/products.reducer';
+import { selectProductSelector } from 'src/app/store/selectors/products.selector';
 
 @Component({
   selector: 'app-products-combo',
@@ -8,24 +13,25 @@ import { apiCallService } from 'src/app/api.service';
 })
 export class ProductsComboComponent implements OnInit {
 
-
+  p: number = 1;
   public data?: any;
 
-  constructor(private apiService: apiCallService) {
-    this.apiService.getData();
+  constructor(private apiService: apiCallService, private store: Store<ProductState>) {
+    console.log("constructor of combo");
   }
 
   ngOnInit() {
-    this.apiService.data$.subscribe(data => {
-      this.data = data.slice(0, 12);
-    });
+    this.apiService.getData()
+      .pipe(tap(data => {
+        this.store.dispatch(ProductAction.getData({ data }));
+      }))
+      .subscribe((data) => {
+        noop //No operation
+      });
 
-    this.apiService.gameByTag$.subscribe(data => {
+    this.store.select(selectProductSelector).subscribe(data => {
       this.data = data;
     })
-  }
 
-  changeDataFromFilter(dataFromFilter: any) {
-    this.data = dataFromFilter.splice(0, Math.min(12, dataFromFilter.length));
   }
 }

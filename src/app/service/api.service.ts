@@ -10,31 +10,31 @@ export class apiCallService {
     'X-RapidAPI-Key': '89073f727bmsh8bced0818c15608p1a64f1jsn7ca59d0df5e2',
     'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
   })
-  constructor(private http: HttpClient) { }
-  private dataSubject = new BehaviorSubject<any>(null);
-  private aGameSubject = new BehaviorSubject<any>(null);
-  private gameByTagSubject = new BehaviorSubject<any>(null);
 
-  data$ = this.dataSubject.asObservable();
-  aGame$ = this.aGameSubject.asObservable();
-  gameByTag$ = this.gameByTagSubject.asObservable();
+
+  constructor(private http: HttpClient) { }
+  // private dataSubject = new BehaviorSubject<any>(null);
+  // private aGameSubject = new BehaviorSubject<any>(null);
+  // private gameByTagSubject = new BehaviorSubject<any>(null);
+
+  // data$ = this.dataSubject.asObservable();
+  // aGame$ = this.aGameSubject.asObservable();
+  // gameByTag$ = this.gameByTagSubject.asObservable();
 
   public uniquePlatforms = ['PC', 'Web Browser'];
   public unqiueGenre = ['Shooter', 'MMOARPG', 'ARPG', 'Strategy', 'MMORPG', 'Fighting', 'Action RPG', 'Battle Royale', 'MOBA', 'Sports', 'Racing', 'Card Game', 'MMO', 'Social', ' MMORPG', 'Fantasy']
 
   options: any;
 
-  queryParams = new HttpParams({ fromObject: { id: '452' } });
-
-
 
   public gameData?: any;
   public particularGame?: any;
 
   getData() {
-    this.http.get("https://free-to-play-games-database.p.rapidapi.com/api/games", { headers: this.headers }).subscribe((data) => {
-      this.dataSubject.next(Object.values(data));
-    })
+    // this.http.get("https://free-to-play-games-database.p.rapidapi.com/api/games", { headers: this.headers }).subscribe((data) => {
+    //   this.dataSubject.next(Object.values(data));
+    // })
+    return this.http.get("https://free-to-play-games-database.p.rapidapi.com/api/games", { headers: this.headers });
   }
 
   aGameData(gameId: string) {
@@ -46,21 +46,22 @@ export class apiCallService {
         'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
       }
     };
+    // console.log("inside aGame data fn");
 
-    this.http.get('https://free-to-play-games-database.p.rapidapi.com/api/game', this.options).subscribe((data) => {
-      this.aGameSubject.next(data);
-    })
+    // console.log(this.http.get('https://free-to-play-games-database.p.rapidapi.com/api/game', this.options));
+
+    return this.http.get('https://free-to-play-games-database.p.rapidapi.com/api/game', this.options);
   }
 
   gamebyTag(tag: any) {
     if (tag.genre && tag.platform) {
-      this.gameByMultipletag(tag);
+      return this.gameByMultipletag(tag);
     } else if (tag.genre) {
-      this.gamebyGenre(tag.genre);
+      return this.gamebyGenre(tag.genre);
     } else if (tag.platform) {
-      this.gameByPlatform(tag.platform);
+      return this.gameByPlatform(tag.platform);
     } else {
-      this.getData();
+      return this.getData();
     }
 
   }
@@ -77,9 +78,7 @@ export class apiCallService {
         'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
       }
     };
-    this.http.get('https://free-to-play-games-database.p.rapidapi.com/api/games', this.options).subscribe((data) => {
-      this.gameByTagSubject.next(data);
-    })
+    return this.http.get('https://free-to-play-games-database.p.rapidapi.com/api/games', this.options)
 
   }
 
@@ -94,9 +93,7 @@ export class apiCallService {
         'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
       }
     };
-    this.http.get('https://free-to-play-games-database.p.rapidapi.com/api/games', this.options).subscribe((data) => {
-      this.gameByTagSubject.next(data);
-    })
+    return this.http.get('https://free-to-play-games-database.p.rapidapi.com/api/games', this.options)
 
   }
 
@@ -111,9 +108,8 @@ export class apiCallService {
         'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
       }
     };
-    this.http.get('https://free-to-play-games-database.p.rapidapi.com/api/games', this.options).subscribe((data) => {
-      this.gameByTagSubject.next(data);
-    })
+
+    return this.http.get('https://free-to-play-games-database.p.rapidapi.com/api/games', this.options);
   }
 
 }

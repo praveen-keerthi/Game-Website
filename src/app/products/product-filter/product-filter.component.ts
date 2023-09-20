@@ -1,5 +1,9 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { apiCallService } from 'src/app/api.service';
+import { Store } from '@ngrx/store';
+import { noop, tap } from 'rxjs';
+import { apiCallService } from 'src/app/service/api.service';
+import { ProductAction } from 'src/app/store/actions/products.action';
+import { ProductState } from 'src/app/store/reducers/products.reducer';
 
 @Component({
   selector: 'app-product-filter',
@@ -15,29 +19,39 @@ export class ProductFilterComponent implements OnInit {
 
   seletedTag: { 'genre': string, 'platform': string } = { 'genre': '', 'platform': '' }
 
-  constructor(private apiService: apiCallService) { }
+  constructor(private apiService: apiCallService, private store: Store<ProductState>) { }
 
   ngOnInit(): void {
   }
 
   selectGenre() {
     this.seletedTag.genre = this.genre.nativeElement.value;
-    this.apiService.gamebyTag(this.seletedTag);
+    this.gameByTagInFilter();
   }
 
   selectPlatform() {
     this.seletedTag.platform = this.platform.nativeElement.value;
-    this.apiService.gamebyTag(this.seletedTag);
+    this.gameByTagInFilter();
   }
 
   clearPlatform() {
     this.platform.nativeElement.value = "";
     this.seletedTag.platform = "";
-    this.apiService.gamebyTag(this.seletedTag);
+    this.gameByTagInFilter();
   }
   clearGenre() {
     this.genre.nativeElement.value = "";
     this.seletedTag.genre = "";
-    this.apiService.gamebyTag(this.seletedTag);
+    this.gameByTagInFilter();
+  }
+
+  gameByTagInFilter() {
+    this.apiService.gamebyTag(this.seletedTag)
+      .pipe(tap(data => {
+        this.store.dispatch(ProductAction.getDataByTag({ data }));
+      }))
+      .subscribe(() => {
+        noop
+      })
   }
 }

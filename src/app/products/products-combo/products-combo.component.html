@@ -1,7 +1,8 @@
 <app-product-filter></app-product-filter>
 <div class="product-card row gx-3 gy-4">
   <!-- <div class="g-lg-4 g-md-6"></div> -->
-  <ng-container *ngFor="let game of data">
+  <ng-container *ngFor="let game of data | paginate: { itemsPerPage: 12, currentPage: p }">
     <app-produts-card class="col-lg-4 col-md-6 col-12" [gameData]="game">{{game}}</app-produts-card>
   </ng-container>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

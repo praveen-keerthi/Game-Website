@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { apiCallService } from 'src/app/api.service';
+import { Store, select } from '@ngrx/store';
+import { tap } from 'rxjs';
+import { apiCallService } from 'src/app/service/api.service';
+import { DetailState } from 'src/app/store/reducers/products.reducer';
+import { detailedGameDataSelector } from 'src/app/store/selectors/products.selector';
 
 @Component({
   selector: 'app-products-detail',
@@ -7,16 +11,22 @@ import { apiCallService } from 'src/app/api.service';
   styleUrls: ['./products-detail.component.scss']
 })
 export class ProductsDetailComponent implements OnInit {
-  public data: any;
+  public data: any = { title: '' };
   public minReqKeys: any;
 
-  constructor(private apiService: apiCallService) { }
+
+  constructor(private apiService: apiCallService, private store: Store<DetailState>) { }
 
   ngOnInit(): void {
-    this.apiService.aGame$.subscribe(data => {
-      this.data = data;
-    })
-    this.minReqKeys = Object.keys(this.data.minimum_system_requirements);
+
+    console.log('going to store');
+
+    this.store.select(detailedGameDataSelector)
+      .subscribe((data) => {
+        console.log(data.game, "gameData");
+        this.data = data
+      })
   }
+
 
 }
