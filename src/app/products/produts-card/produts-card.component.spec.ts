@@ -13,7 +13,7 @@ import { of } from 'rxjs';
 
 
 describe('ProdutsCardComponent', () => {
-  let component: ProdutsCardComponent; // Replace with your actual component name
+  let component: ProdutsCardComponent; 
   let apiService: jasmine.SpyObj<apiCallService>;
   let store: jasmine.SpyObj<Store>;
   let router: jasmine.SpyObj<Router>;
@@ -26,14 +26,14 @@ describe('ProdutsCardComponent', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        ProdutsCardComponent, // Replace with your actual component
+        ProdutsCardComponent, 
         { provide: apiCallService, useValue: apiService },
         { provide: Store, useValue: store },
         { provide: Router, useValue: router },
       ],
     });
 
-    component = TestBed.inject(ProdutsCardComponent); // Replace with your actual component
+    component = TestBed.inject(ProdutsCardComponent); 
   });
 
   it('should load data and navigate to /detail on new page', () => {
